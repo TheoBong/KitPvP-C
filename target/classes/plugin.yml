@@ -1,0 +1,4 @@
+name: KitPvP
+version: 1.0
+author: Theo
+main: cc.kitpvp.KitPvP.KitPvPPlugin
