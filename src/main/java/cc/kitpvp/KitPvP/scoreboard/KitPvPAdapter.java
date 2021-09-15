@@ -30,6 +30,8 @@ public class KitPvPAdapter implements ScoreboardAdapter {
         Profile profile = plugin.getPlayerManager().getProfile(player);
 
         plugin.getServer().getOnlinePlayers().forEach(players -> {
+            Profile targetProfile = plugin.getPlayerManager().getProfile(players);
+
             Objective objective = player.getScoreboard().getObjective("objectiveBelow");
             Score score = objective.getScore(players);
 
@@ -42,7 +44,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
                 case SPAWN:
                 default:
                     objective.setDisplayName("Kills");
-                    score.setScore(profile.getStatistics().getKills());
+                    score.setScore(targetProfile.getStatistics().getKills());
                     break;
             }
         });
