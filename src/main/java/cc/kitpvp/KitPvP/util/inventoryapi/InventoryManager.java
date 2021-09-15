@@ -15,10 +15,10 @@ import org.bukkit.plugin.Plugin;
 import java.util.*;
 
 public class InventoryManager implements Listener {
-    private final Map<Class<? extends InventoryWrapper>, InventoryWrapper> wrapperClasses = new HashMap<>();
-    private final Map<Class<? extends PlayerInventoryWrapper>, PlayerInventoryWrapper> playerWrapperClasses = new HashMap<>();
-    private final Map<Inventory, InventoryWrapper> inventoryWrappers = new HashMap<>();
-    private final Set<InventoryAction> acceptableActions = new HashSet<>();
+    private Map<Class<? extends InventoryWrapper>, InventoryWrapper> wrapperClasses = new HashMap<>();
+    private Map<Class<? extends PlayerInventoryWrapper>, PlayerInventoryWrapper> playerWrapperClasses = new HashMap<>();
+    private Map<Inventory, InventoryWrapper> inventoryWrappers = new HashMap<>();
+    private Set<InventoryAction> acceptableActions = new HashSet<>();
 
     public InventoryManager(Plugin plugin) {
         acceptableActions.addAll(Arrays.asList(InventoryAction.MOVE_TO_OTHER_INVENTORY, InventoryAction.PICKUP_ALL, InventoryAction.PICKUP_HALF, InventoryAction.PICKUP_ONE, InventoryAction.PICKUP_SOME));
@@ -59,7 +59,7 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onWrapperClick(InventoryClickEvent event) {
-        final Player player = (Player) event.getWhoClicked();
+        Player player = (Player) event.getWhoClicked();
 
         if (event.getClickedInventory() == null
                 || event.getClickedInventory() == player.getInventory()) {
@@ -70,8 +70,8 @@ public class InventoryManager implements Listener {
         InventoryWrapper wrapper = getMatchingInventory(event.getClickedInventory());
 
         if (wrapper == null) {
-            for (final PlayerInventoryWrapper playerWrapper : playerWrapperClasses.values()) {
-                final InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
+            for (PlayerInventoryWrapper playerWrapper : playerWrapperClasses.values()) {
+                InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
 
                 if (foundWrapper != null) {
                     wrapper = foundWrapper;
@@ -93,7 +93,7 @@ public class InventoryManager implements Listener {
             return;
         }
 
-        final Action action = wrapper.getAction(event.getSlot());
+        Action action = wrapper.getAction(event.getSlot());
 
         if (action != null) {
             event.setCancelled(true);
@@ -103,10 +103,10 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
-        final Player player = (Player) event.getPlayer();
+        Player player = (Player) event.getPlayer();
 
         playerWrapperClasses.values().forEach(playerWrapper -> {
-            final InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
+            InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
             if (foundWrapper != null) {
                 playerWrapper.close(player);
             }
@@ -115,10 +115,10 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         playerWrapperClasses.values().forEach(playerWrapper -> {
-            final InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
+            InventoryWrapper foundWrapper = playerWrapper.getOpenPlayerWrappers().get(player.getUniqueId());
             if (foundWrapper != null) {
                 playerWrapper.close(player);
             }

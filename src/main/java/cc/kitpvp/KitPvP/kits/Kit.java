@@ -5,6 +5,7 @@ import cc.kitpvp.KitPvP.player.PlayerState;
 import cc.kitpvp.KitPvP.player.Profile;
 import cc.kitpvp.KitPvP.util.item.ItemBuilder;
 import cc.kitpvp.KitPvP.util.message.CC;
+import cc.kitpvp.KitPvP.util.timer.Timer;
 import cc.kitpvp.KitPvP.util.timer.impl.IntegerTimer;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -14,13 +15,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import cc.kitpvp.KitPvP.util.timer.Timer;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Kit implements Listener {
-    protected final KitPvPPlugin plugin;
+    protected KitPvPPlugin plugin;
     @Getter
     private final String name;
     @Getter
@@ -34,8 +34,8 @@ public abstract class Kit implements Listener {
         this.plugin = plugin;
         this.name = name;
 
-        final ItemBuilder builder = ItemBuilder.from(icon);
-        final String[] coloredDescription = Arrays.stream(description).map(s -> CC.PRIMARY + s).toArray(String[]::new);
+        ItemBuilder builder = ItemBuilder.from(icon);
+        String[] coloredDescription = Arrays.stream(description).map(s -> CC.PRIMARY + s).toArray(String[]::new);
 
         this.icon = builder.name(CC.SECONDARY + name).lore(coloredDescription).build();
         this.contents = contentsBuilder().build();

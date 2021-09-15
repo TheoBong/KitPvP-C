@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public abstract class PlayerInventoryWrapper {
-    private final Map<UUID, InventoryWrapper> openPlayerWrappers = new HashMap<>();
-    private final String name;
-    private final int rows;
+    private Map<UUID, InventoryWrapper> openPlayerWrappers = new HashMap<>();
+    private String name;
+    private int rows;
 
     public PlayerInventoryWrapper(String name, int rows) {
         this.name = name;

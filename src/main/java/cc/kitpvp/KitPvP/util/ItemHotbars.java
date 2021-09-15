@@ -27,9 +27,9 @@ public enum ItemHotbars {
 
     private final ItemStack[] hotbar;
 
-    public void apply(final Player player) {
+    public void apply(Player player) {
         IntStream.range(0, hotbar.length).forEach(i -> {
-            final ItemStack item = hotbar[i];
+            ItemStack item = hotbar[i];
             player.getInventory().setItem(i, item == null ? new ItemStack(Material.AIR) : item.clone());
         });
 

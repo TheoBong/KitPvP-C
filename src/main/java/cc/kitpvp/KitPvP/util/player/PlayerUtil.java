@@ -5,9 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.lang.reflect.InvocationTargetException;
-
-public final class PlayerUtil {
+public class PlayerUtil {
     private PlayerUtil() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class ItemBuilder {
-    private final ItemStack item;
+    private ItemStack item;
 
     private ItemBuilder(ItemStack item) {
         this.item = item;

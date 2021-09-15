@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class RegionManager {
-    private final Map<UUID, RegionData> regionData = new HashMap<>();
+    private Map<UUID, RegionData> regionData = new HashMap<>();
 
     public void startEditingRegion(Player player) {
         regionData.put(player.getUniqueId(), new RegionData());

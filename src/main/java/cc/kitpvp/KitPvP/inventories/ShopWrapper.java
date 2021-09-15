@@ -1,6 +1,5 @@
 package cc.kitpvp.KitPvP.inventories;
 
-import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.util.inventoryapi.PlayerAction;
 import cc.kitpvp.KitPvP.util.inventoryapi.SimpleInventoryWrapper;
 import cc.kitpvp.KitPvP.util.item.ItemBuilder;
@@ -9,12 +8,11 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class ShopWrapper extends SimpleInventoryWrapper {
-    private final KitPvPPlugin plugin;
     private int count = 2;
     private int row = 2;
-    public ShopWrapper(KitPvPPlugin plugin) {
+
+    public ShopWrapper() {
         super("Shop", 3);
-        this.plugin = plugin;
     }
 
     @Override

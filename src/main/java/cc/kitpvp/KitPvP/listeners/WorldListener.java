@@ -48,7 +48,7 @@ public class WorldListener implements Listener {
     }
 
     @EventHandler
-    public void onTrample(final PlayerInteractEvent event) {
+    public void onTrample(PlayerInteractEvent event) {
         if (event.getPlayer().getGameMode() != GameMode.CREATIVE && event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
         }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ScoreboardUpdateEvent extends PlayerEvent {
     private static final HandlerList HANDLER_LIST = new HandlerList();
-    private final List<ScoreboardLine> lines = new LinkedList<>();
+    private List<ScoreboardLine> lines = new LinkedList<>();
     private String title, header = "", footer = "";
 
     ScoreboardUpdateEvent(Player player, String title) {

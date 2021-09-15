@@ -39,6 +39,7 @@ cc\kitpvp\KitPvP\player\PlayerState.class
 cc\kitpvp\KitPvP\util\scoreboardapi\ScoreboardLine.class
 cc\kitpvp\KitPvP\events\DeathEvent.class
 cc\kitpvp\KitPvP\player\Profile.class
+cc\kitpvp\KitPvP\listeners\EntityListener.class
 cc\kitpvp\KitPvP\util\message\Color.class
 cc\kitpvp\KitPvP\util\inventoryapi\SimpleInventoryWrapper.class
 cc\kitpvp\KitPvP\kits\KitContents$1.class

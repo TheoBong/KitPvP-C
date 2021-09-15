@@ -9,6 +9,7 @@ import cc.kitpvp.KitPvP.util.message.CC;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
 import java.util.List;
 
 public class KitShopPlayerWrapper extends PlayerInventoryWrapper {
@@ -33,10 +34,10 @@ public class KitShopPlayerWrapper extends PlayerInventoryWrapper {
         inventoryWrapper.fillBorder(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1));
 
         plugin.getKitManager().getKits().forEach(kit -> {
-            final boolean kitOwned = plugin.getPlayerManager().getProfile(player).getPurchasedKits().contains(kit.getName());
-            final String owned = kitOwned ? CC.GREEN + " Owned" : CC.RED + " Unowned";
-            final List<String> oldLore = kit.getIcon().getItemMeta().getLore();
-            final ItemBuilder kitItem = ItemBuilder.from(kit.getIcon().clone());
+            boolean kitOwned = plugin.getPlayerManager().getProfile(player).getPurchasedKits().contains(kit.getName());
+            String owned = kitOwned ? CC.GREEN + " Owned" : CC.RED + " Unowned";
+            List<String> oldLore = kit.getIcon().getItemMeta().getLore();
+            ItemBuilder kitItem = ItemBuilder.from(kit.getIcon().clone());
             kitItem.name(kit.getIcon().getItemMeta().getDisplayName() + owned);
             if (!kitOwned) {
                 kitItem.lore(oldLore.get(0), CC.GREEN + "Click to purchase for 500 credits.");

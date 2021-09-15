@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class SimpleInventoryWrapper implements InventoryWrapper {
-    private final Map<Integer, Action> actions = new HashMap<>();
-    private final Inventory inventory;
-    private final String name;
-    private final int rows;
+    private Map<Integer, Action> actions = new HashMap<>();
+    private Inventory inventory;
+    private String name;
+    private int rows;
 
     public SimpleInventoryWrapper(String name, int rows) {
         this.name = name;

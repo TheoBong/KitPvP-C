@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class PlayerStatistics {
-    @Getter
-    @Setter
-    private int kills, deaths, killStreak, highestKillStreak, credits;
+    @Getter @Setter private int kills, deaths, killStreak, highestKillStreak, credits;
 
     public double getKillDeathRatio() {
         return kills == 0 ? 0.0 : deaths == 0 ? kills : Math.round(((double) kills / deaths) * 10.0) / 10.0;

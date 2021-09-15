@@ -45,8 +45,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onLogin(PlayerLoginEvent event) {
-        final Player player = event.getPlayer();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
+        Player player = event.getPlayer();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
 
         if (profile == null) {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, CC.RED + "Your data failed to load for KitPvP. Try logging in again.");
@@ -59,7 +59,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         PlayerUtil.clearPlayer(player);
 
@@ -79,17 +79,17 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent event) {
-        final Player player = event.getPlayer();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
+        Player player = event.getPlayer();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
         if (profile == null) {
             return;
         }
 
-        final List<Player> nearbyPlayers = player.getNearbyEntities(32.0, 32.0, 32.0).stream()
+        List<Player> nearbyPlayers = player.getNearbyEntities(32.0, 32.0, 32.0).stream()
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
                 .collect(Collectors.toList());
-        final boolean kill = nearbyPlayers.stream().map(nearbyPlayer -> plugin.getPlayerManager().getProfile(nearbyPlayer)).anyMatch(nearbyProfile -> nearbyProfile.getState() == PlayerState.FFA);
+        boolean kill = nearbyPlayers.stream().map(nearbyPlayer -> plugin.getPlayerManager().getProfile(nearbyPlayer)).anyMatch(nearbyProfile -> nearbyProfile.getState() == PlayerState.FFA);
 
         if (kill) {
             player.setHealth(0.0);
@@ -106,8 +106,8 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        final Player player = event.getPlayer();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
+        Player player = event.getPlayer();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
 
         if (profile.getState() != PlayerState.FFA) {
             event.setCancelled(true);
@@ -115,7 +115,7 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        final Timer timer = profile.getPearlTimer();
+        Timer timer = profile.getPearlTimer();
 
         if (timer.isActive(false)) {
             event.setCancelled(true);
@@ -130,8 +130,8 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        final Player player = event.getPlayer();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
+        Player player = event.getPlayer();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
 
         if (player.getGameMode() != GameMode.CREATIVE
                 && event.getItem().getType() == Material.POTION) {
@@ -153,7 +153,7 @@ public class PlayerListener implements Listener {
                 plugin.getInventoryManager().getPlayerWrapper(KitSelectorPlayerWrapper.class).open(player);
                 break;
             case WATCH:
-                final Kit kit = profile.getLastKit();
+                Kit kit = profile.getLastKit();
 
                 if (kit != null) {
                     kit.apply(player);
@@ -173,7 +173,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         if (player.getGameMode() != GameMode.CREATIVE) {
             event.setCancelled(true);
@@ -182,15 +182,15 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        final Player player = event.getPlayer();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
+        Player player = event.getPlayer();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
 
         if (!profile.isAwaitingTeleport()) {
             return;
         }
 
-        final Location to = event.getTo();
-        final Location from = event.getFrom();
+        Location to = event.getTo();
+        Location from = event.getFrom();
 
         if (MathUtil.isWithin(to.getX(), from.getX(), 0.1) && MathUtil.isWithin(to.getZ(), from.getZ(), 0.1)) {
             return;
@@ -203,20 +203,20 @@ public class PlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         event.getDrops().clear();
 
-        final Player player = event.getEntity();
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
-        final PlayerDamageData damageData = profile.getDamageData();
-        final double totalDamage = damageData.total();
-        final Map<UUID, Double> sortedDamage = damageData.sortedMap();
+        Player player = event.getEntity();
+        Profile profile = plugin.getPlayerManager().getProfile(player);
+        PlayerDamageData damageData = profile.getDamageData();
+        double totalDamage = damageData.total();
+        Map<UUID, Double> sortedDamage = damageData.sortedMap();
         boolean killer = true;
         profile.setLastAttacked(null);
 
         for (Map.Entry<UUID, Double> entry : sortedDamage.entrySet()) {
-            final UUID damagerId = entry.getKey();
-            final Player damager = plugin.getServer().getPlayer(damagerId);
-            final Profile damagerProfile = plugin.getPlayerManager().getProfile(damager);
-            final double damage = entry.getValue();
-            final double percent = damage / totalDamage;
+            UUID damagerId = entry.getKey();
+            Player damager = plugin.getServer().getPlayer(damagerId);
+            Profile damagerProfile = plugin.getPlayerManager().getProfile(damager);
+            double damage = entry.getValue();
+            double percent = damage / totalDamage;
 
             if (!killer && percent < 0.15) {
                 continue;
@@ -224,7 +224,7 @@ public class PlayerListener implements Listener {
 
             int worth = killer ? 10 : (int) (10 * percent);
 
-            final String strPercent = String.format("%.1f", percent * 100);
+            String strPercent = String.format("%.1f", percent * 100);
 
             damagerProfile.getStatistics().setCredits(damagerProfile.getStatistics().getCredits() + worth);
 
@@ -265,7 +265,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         plugin.getPlayerManager().giveSpawnItems(player);
         plugin.getPlayerManager().acquireSpawnProtection(player);

@@ -7,8 +7,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.function.BiConsumer;
 
 public class PlayerAction implements Action {
-    private final BiConsumer<Player, ClickType> consumer;
-    private final boolean autoClose;
+    private BiConsumer<Player, ClickType> consumer;
+    private boolean autoClose;
 
     public PlayerAction(BiConsumer<Player, ClickType> biConsumer) {
         this(biConsumer, false);
@@ -22,7 +22,7 @@ public class PlayerAction implements Action {
     @Override
     public void onClick(InventoryClickEvent event) {
         ClickType clickType = event.getClick();
-        final Player player = (Player) event.getWhoClicked();
+        Player player = (Player) event.getWhoClicked();
         consumer.accept(player, clickType);
 
         if (autoClose) {

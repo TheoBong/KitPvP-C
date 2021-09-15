@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class TimeUtil {
+public class TimeUtil {
     private TimeUtil() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
@@ -51,7 +51,7 @@ public final class TimeUtil {
         return time.toString().trim();
     }
 
-    private static String parseTimeSpec(long time, String spec) {
+    private static final String parseTimeSpec(long time, String spec) {
         return time + " " + (time == 1 ? spec : spec + "s") + " ";
     }
 
@@ -168,7 +168,7 @@ public final class TimeUtil {
         }
     }
 
-    private static int dateDiff(int type, Calendar fromDate, Calendar toDate, boolean future) {
+    private static final int dateDiff(int type, Calendar fromDate, Calendar toDate, boolean future) {
         int diff = 0;
 
         long savedDate;

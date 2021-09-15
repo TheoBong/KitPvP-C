@@ -15,14 +15,13 @@ import org.bson.UuidRepresentation;
 import java.util.Map;
 
 public class Mongo {
-    private KitPvPPlugin plugin;
-    private MongoClient mongoClient;
-    private MongoDatabase mongoDatabase;
+    private final KitPvPPlugin plugin;
+    private final MongoDatabase mongoDatabase;
 
     public Mongo(KitPvPPlugin plugin) {
         this.plugin = plugin;
 
-        mongoClient = MongoClients.create(MongoClientSettings.builder().uuidRepresentation(UuidRepresentation.STANDARD).build());
+        MongoClient mongoClient = MongoClients.create(MongoClientSettings.builder().uuidRepresentation(UuidRepresentation.STANDARD).build());
         mongoDatabase = mongoClient.getDatabase("kitpvp");
     }
 

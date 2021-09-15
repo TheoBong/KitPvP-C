@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClickableMessage {
-    private final List<TextComponent> components = new ArrayList<>();
+    private List<TextComponent> components = new ArrayList<>();
     private TextComponent current;
 
     public ClickableMessage(String msg) {

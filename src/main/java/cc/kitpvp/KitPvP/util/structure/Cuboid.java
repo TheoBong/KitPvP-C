@@ -15,9 +15,9 @@ import java.util.*;
  * @skidder Coords
  */
 public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializable {
-    private final String worldName;
-    private final int x1, y1, z1;
-    private final int x2, y2, z2;
+    private String worldName;
+    private int x1, y1, z1;
+    private int x2, y2, z2;
 
     public Cuboid(Location locationA, Location locationB) {
         if (!locationA.getWorld().equals(locationB.getWorld())) {

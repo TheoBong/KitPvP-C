@@ -3,7 +3,7 @@ package cc.kitpvp.KitPvP.util.timer;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractTimer implements Timer {
-    private final long ms;
+    private long ms;
     protected long expiry;
 
     protected AbstractTimer(TimeUnit unit, int amount) {

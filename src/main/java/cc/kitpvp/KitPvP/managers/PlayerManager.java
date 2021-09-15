@@ -41,7 +41,7 @@ public class PlayerManager {
     }
 
     public void saveAllProfiles() {
-        profiles.values().forEach(profile -> profile.push(false));
+        profiles.values().forEach(profile -> profile.push(true));
     }
 
     public void startExaminationTask(Player p, Player personToBeExamined) {

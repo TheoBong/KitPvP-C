@@ -22,9 +22,9 @@ import java.util.stream.IntStream;
 public class ScoreboardApi implements Listener, Runnable {
     private static final String OBJECTIVE_ID = "objective";
     private static final String BELOW_OBJECTIVE_ID = "objectiveBelow";
-    private final ScoreboardAdapter adapter;
-    private final Plugin plugin;
-    private final boolean belowName;
+    private ScoreboardAdapter adapter;
+    private Plugin plugin;
+    private boolean belowName;
 
     public ScoreboardApi(Plugin plugin, KitPvPAdapter adapter, boolean belowName) {
         this.plugin = plugin;

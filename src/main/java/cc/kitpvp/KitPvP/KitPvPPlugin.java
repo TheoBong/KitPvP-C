@@ -5,13 +5,16 @@ import cc.kitpvp.KitPvP.commands.impl.SpawnCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.EditRegionCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.SetSpawnCommand;
 import cc.kitpvp.KitPvP.inventories.*;
+import cc.kitpvp.KitPvP.listeners.EntityListener;
 import cc.kitpvp.KitPvP.listeners.PlayerListener;
 import cc.kitpvp.KitPvP.listeners.RegionListener;
 import cc.kitpvp.KitPvP.listeners.WorldListener;
-import cc.kitpvp.KitPvP.managers.*;
+import cc.kitpvp.KitPvP.managers.KitManager;
+import cc.kitpvp.KitPvP.managers.PlayerManager;
+import cc.kitpvp.KitPvP.managers.RegionManager;
 import cc.kitpvp.KitPvP.scoreboard.KitPvPAdapter;
-import cc.kitpvp.KitPvP.storage.mongo.Mongo;
 import cc.kitpvp.KitPvP.storage.flatfile.Config;
+import cc.kitpvp.KitPvP.storage.mongo.Mongo;
 import cc.kitpvp.KitPvP.util.inventoryapi.InventoryManager;
 import cc.kitpvp.KitPvP.util.scoreboardapi.ScoreboardApi;
 import cc.kitpvp.KitPvP.util.structure.Cuboid;
@@ -46,7 +49,7 @@ public class KitPvPPlugin extends JavaPlugin {
 
     private void registerSerializableClass(Class<?> clazz) {
         if (ConfigurationSerializable.class.isAssignableFrom(clazz)) {
-            final Class<? extends ConfigurationSerializable> serializable = clazz.asSubclass(ConfigurationSerializable.class);
+            Class<? extends ConfigurationSerializable> serializable = clazz.asSubclass(ConfigurationSerializable.class);
             ConfigurationSerialization.registerClass(serializable);
         }
     }
@@ -55,7 +58,7 @@ public class KitPvPPlugin extends JavaPlugin {
     public void onEnable() {
         registerSerializableClass(Cuboid.class);
 
-        final World mainWorld = getServer().getWorlds().get(0);
+        World mainWorld = getServer().getWorlds().get(0);
 
         locationConfig = new Config(this, "locations");
         locationConfig.addDefault("spawn", mainWorld.getSpawnLocation());
@@ -94,6 +97,7 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new SetSpawnCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new EntityListener(this), this);
         getServer().getPluginManager().registerEvents(new RegionListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
 

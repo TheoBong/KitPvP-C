@@ -2,17 +2,14 @@ package cc.kitpvp.KitPvP.player;
 
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.kits.Kit;
-import cc.kitpvp.KitPvP.storage.mongo.MongoDeserializedResult;
 import cc.kitpvp.KitPvP.storage.mongo.MongoUpdate;
 import cc.kitpvp.KitPvP.util.timer.Timer;
 import cc.kitpvp.KitPvP.util.timer.impl.DoubleTimer;
-import cc.kitpvp.KitPvP.util.timer.impl.IntegerTimer;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
@@ -20,11 +17,11 @@ public class Profile {
     private final KitPvPPlugin plugin;
 
     private boolean loaded = false;
-    private final UUID uuid;
-    private final String name;
-    private final PlayerDamageData damageData = new PlayerDamageData();
-    private final PlayerStatistics statistics = new PlayerStatistics();
-    private final Timer pearlTimer = new DoubleTimer(16);
+    private UUID uuid;
+    private String name;
+    private PlayerDamageData damageData = new PlayerDamageData();
+    private PlayerStatistics statistics = new PlayerStatistics();
+    private Timer pearlTimer = new DoubleTimer(16);
     private PlayerState state = PlayerState.SPAWN;
     private List<String> freeKits = new ArrayList<>(Arrays.asList("PvP"));
     private List<String> purchasedKits = new ArrayList<>();

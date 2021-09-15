@@ -32,10 +32,10 @@ public class SettingsPlayerWrapper extends PlayerInventoryWrapper {
 
     private void format(Player player, InventoryWrapper inventoryWrapper) {
 
-        final Profile profile = plugin.getPlayerManager().getProfile(player);
-        final String[] scoreboard = getSettingLore(profile.isScoreboardEnabled());
-        final PlayerTimeType timeType = profile.getCurrentTimeType();
-        final String[] time = getTimeLore(profile.getCurrentTimeType());
+        Profile profile = plugin.getPlayerManager().getProfile(player);
+        String[] scoreboard = getSettingLore(profile.isScoreboardEnabled());
+        PlayerTimeType timeType = profile.getCurrentTimeType();
+        String[] time = getTimeLore(profile.getCurrentTimeType());
 
         inventoryWrapper.fillBorder(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1));
 
@@ -45,7 +45,7 @@ public class SettingsPlayerWrapper extends PlayerInventoryWrapper {
             update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(2, 3, new ItemBuilder(Material.WATCH).name(CC.PRIMARY + "Set Your Time").lore(
-                time).build(), new PlayerAction((actionPlayer, clickType) -> { final PlayerTimeType nextTimeType = timeType.nextTimeType();
+                time).build(), new PlayerAction((actionPlayer, clickType) -> { PlayerTimeType nextTimeType = timeType.nextTimeType();
             profile.setCurrentTimeType(nextTimeType);
             nextTimeType.apply(player);
             update(player, inventoryWrapper);
