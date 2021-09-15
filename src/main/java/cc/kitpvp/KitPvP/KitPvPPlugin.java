@@ -78,7 +78,7 @@ public class KitPvPPlugin extends JavaPlugin {
         inventoryManager.registerPlayerWrapper(new KitPlayerWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitSelectorPlayerWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitShopPlayerWrapper(this));
-        inventoryManager.registerWrapper(new ShopWrapper(this));
+        inventoryManager.registerWrapper(new ShopWrapper());
         inventoryManager.registerPlayerWrapper(new SettingsPlayerWrapper(this));
 
         new ScoreboardApi(this, new KitPvPAdapter(this), true);
