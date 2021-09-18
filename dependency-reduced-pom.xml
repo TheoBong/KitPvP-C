@@ -30,9 +30,9 @@
               <goal>describe</goal>
             </goals>
             <configuration>
-              <format>git-Store-%s</format>
+              <format>git-KitPvP-%s</format>
               <scmDirectory>${project.basedir}</scmDirectory>
-              <descriptionProperty>store.desc</descriptionProperty>
+              <descriptionProperty>kitpvp.desc</descriptionProperty>
             </configuration>
           </execution>
         </executions>

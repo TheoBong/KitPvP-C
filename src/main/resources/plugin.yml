@@ -1,4 +1,4 @@
 name: KitPvP
-version: 1.0
+version: ${project.desc}
 author: Theo
 main: cc.kitpvp.KitPvP.KitPvPPlugin
