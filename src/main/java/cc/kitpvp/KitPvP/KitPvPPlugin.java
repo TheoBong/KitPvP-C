@@ -2,6 +2,7 @@ package cc.kitpvp.KitPvP;
 
 import cc.kitpvp.KitPvP.commands.BaseCommand;
 import cc.kitpvp.KitPvP.commands.impl.SpawnCommand;
+import cc.kitpvp.KitPvP.commands.impl.staff.CreditsCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.EditRegionCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.SetSpawnCommand;
 import cc.kitpvp.KitPvP.inventories.*;
@@ -95,6 +96,7 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new SpawnCommand(this));
         registerCommand(new EditRegionCommand(this));
         registerCommand(new SetSpawnCommand(this));
+        registerCommand(new CreditsCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
