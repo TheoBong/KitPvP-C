@@ -11,6 +11,7 @@ import cc.kitpvp.KitPvP.listeners.PlayerListener;
 import cc.kitpvp.KitPvP.listeners.RegionListener;
 import cc.kitpvp.KitPvP.listeners.WorldListener;
 import cc.kitpvp.KitPvP.managers.KitManager;
+import cc.kitpvp.KitPvP.managers.LeaderBoardManager;
 import cc.kitpvp.KitPvP.managers.PlayerManager;
 import cc.kitpvp.KitPvP.managers.RegionManager;
 import cc.kitpvp.KitPvP.scoreboard.KitPvPAdapter;
@@ -47,6 +48,7 @@ public class KitPvPPlugin extends JavaPlugin {
     @Getter private KitManager kitManager;
     @Getter private InventoryManager inventoryManager;
     @Getter private RegionManager regionManager;
+    @Getter private LeaderBoardManager leaderBoardManager;
 
     private void registerSerializableClass(Class<?> clazz) {
         if (ConfigurationSerializable.class.isAssignableFrom(clazz)) {
@@ -75,6 +77,7 @@ public class KitPvPPlugin extends JavaPlugin {
         kitManager = new KitManager(this);
         regionManager = new RegionManager();
         inventoryManager = new InventoryManager(this);
+        leaderBoardManager = new LeaderBoardManager(this);
 
         inventoryManager.registerPlayerWrapper(new KitPlayerWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitSelectorPlayerWrapper(this));
@@ -101,6 +104,7 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new KitCommand(this));
         registerCommand(new KitShopCommand(this));
         registerCommand(new StatisticsCommand(this));
+        registerCommand(new LeaderboardCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);

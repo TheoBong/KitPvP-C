@@ -7,16 +7,32 @@ import cc.kitpvp.KitPvP.util.inventoryapi.PlayerAction;
 import cc.kitpvp.KitPvP.util.inventoryapi.PlayerInventoryWrapper;
 import cc.kitpvp.KitPvP.util.item.ItemBuilder;
 import cc.kitpvp.KitPvP.util.message.CC;
+import cc.kitpvp.KitPvP.util.message.Color;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public class StatsPlayerWrapper extends PlayerInventoryWrapper {
     private final KitPvPPlugin plugin;
 
-    public StatsPlayerWrapper(KitPvPPlugin plugin) {
-        super("Stats", 3);
+    private int kills, deaths, kill_streak, credits, highest_kill_streak;
+    private double kdr;
+
+    public StatsPlayerWrapper(KitPvPPlugin plugin, String target, int kills, int deaths, int kill_streak, int credits, int highest_kill_streak) {
+        super(target + " Stats", 3);
+
         this.plugin = plugin;
+
+        this.kills = kills;
+        this.deaths = deaths;
+        this.kill_streak = kill_streak;
+        this.credits = credits;
+        this.highest_kill_streak = highest_kill_streak;
+
+        this.kdr = kills == 0 ? 0.0 : deaths == 0 ? kills : Math.round(((double) kills / deaths) * 10.0) / 10.0;
     }
 
     @Override
@@ -38,40 +54,33 @@ public class StatsPlayerWrapper extends PlayerInventoryWrapper {
             count = 2;
         }
 
-        PlayerStatistics statistics = plugin.getPlayerManager().getProfile(player).getStatistics();
-
         ItemStack skeletonSkull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 
         inventoryWrapper.fillBorder(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1));
 
         inventoryWrapper.setItem(row, count++, new ItemBuilder(Material.DIAMOND_SWORD).name(CC.PRIMARY + "Kills")
-                .lore(CC.ACCENT + statistics.getKills()).build(), new PlayerAction((actionPlayer, clickType) -> {
-                    actionPlayer.isOnline();
+                .lore(CC.ACCENT + kills).build(), new PlayerAction((actionPlayer, clickType) -> {
                     update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(row, count++, ItemBuilder.from(skeletonSkull).name(CC.PRIMARY + "Deaths")
-                .lore(CC.ACCENT + statistics.getDeaths()).build(), new PlayerAction((actionPlayer, clickType) -> {
-            actionPlayer.isOnline();
+                .lore(CC.ACCENT + deaths).build(), new PlayerAction((actionPlayer, clickType) -> {
             update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(row, count++, new ItemBuilder(Material.BLAZE_POWDER).name(CC.PRIMARY + "Kill Streak")
-                .lore(CC.ACCENT + statistics.getKillStreak()).build(), new PlayerAction((actionPlayer, clickType) -> {
-            actionPlayer.isOnline();
+                .lore(CC.ACCENT + kill_streak).build(), new PlayerAction((actionPlayer, clickType) -> {
             update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(row, count++, new ItemBuilder(Material.REDSTONE).name(CC.PRIMARY + "KDR")
-                .lore(CC.ACCENT + statistics.getKillDeathRatio()).build(), new PlayerAction((actionPlayer, clickType) -> {
-            actionPlayer.isOnline();
+                .lore(CC.ACCENT + kdr).build(), new PlayerAction((actionPlayer, clickType) -> {
             update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(row, count++, new ItemBuilder(Material.GOLD_INGOT).name(CC.PRIMARY + "Credits")
-                .lore(CC.ACCENT + statistics.getCredits()).build(), new PlayerAction((actionPlayer, clickType) -> {
+                .lore(CC.ACCENT + credits).build(), new PlayerAction((actionPlayer, clickType) -> {
             actionPlayer.isOnline();
             update(player, inventoryWrapper);
         }, false));
         inventoryWrapper.setItem(row, count++, new ItemBuilder(Material.BLAZE_ROD).name(CC.PRIMARY + "Highest Kill Streak")
-                .lore(CC.ACCENT + statistics.getHighestKillStreak()).build(), new PlayerAction((actionPlayer, clickType) -> {
-            actionPlayer.isOnline();
+                .lore(CC.ACCENT + highest_kill_streak).build(), new PlayerAction((actionPlayer, clickType) -> {
             update(player, inventoryWrapper);
         }, false));
     }

@@ -3,15 +3,14 @@ package cc.kitpvp.KitPvP.storage.mongo;
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.util.ThreadUtil;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.UuidRepresentation;
 
+import java.util.Iterator;
 import java.util.Map;
 
 public class Mongo {
@@ -54,7 +53,10 @@ public class Mongo {
         });
     }
 
-    public void getCollectionIterable(boolean async, String collectionName, MongoIterableResult mir) {
-        ThreadUtil.runTask(async, plugin, ()-> mir.call(mongoDatabase.getCollection(collectionName).find()));
+    public Iterator<Document> sortNumber(boolean async, String collectionName, String field) throws LinkageError {
+        MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
+
+        FindIterable<Document> iterDoc = collection.find().sort(Sorts.descending(field));
+        return iterDoc.iterator();
     }
 }

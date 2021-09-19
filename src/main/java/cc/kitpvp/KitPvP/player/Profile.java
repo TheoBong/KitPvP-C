@@ -40,7 +40,7 @@ public class Profile {
         this.name = name;
         this.uuid = uuid;
 
-        pull(true);
+        pull(false);
     }
 
     @SuppressWarnings("unchecked")

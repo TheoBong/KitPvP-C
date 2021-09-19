@@ -2,6 +2,8 @@ package cc.kitpvp.KitPvP.commands.impl;
 
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.commands.BaseCommand;
+import cc.kitpvp.KitPvP.inventories.KitShopPlayerWrapper;
+import cc.kitpvp.KitPvP.inventories.StatsPlayerWrapper;
 import cc.kitpvp.KitPvP.player.Profile;
 import cc.kitpvp.KitPvP.util.ThreadUtil;
 import cc.kitpvp.KitPvP.util.WebPlayer;
@@ -14,6 +16,9 @@ import java.util.UUID;
 
 public class StatisticsCommand extends BaseCommand {
     private final KitPvPPlugin plugin;
+
+    private String targetName;
+    private int kills, deaths, kill_streak, credits, highest_kill_streak;
 
     public StatisticsCommand(KitPvPPlugin plugin) {
         super("stats");
@@ -36,13 +41,14 @@ public class StatisticsCommand extends BaseCommand {
                 if (target != null && target.isOnline()) {
                     Profile targetProfile = plugin.getPlayerManager().getProfile(target);
 
-                    player.sendMessage(Color.translate("&6&lStatistics of " + target.getDisplayName()) );
-                    player.sendMessage("Kills: " + targetProfile.getStatistics().getKills());
-                    player.sendMessage("Deaths: " + targetProfile.getStatistics().getDeaths());
-                    player.sendMessage("Kill Streak: " + targetProfile.getStatistics().getKillStreak());
-                    player.sendMessage("KDR: " + targetProfile.getStatistics().getKillDeathRatio());
-                    player.sendMessage("Credits: " + targetProfile.getStatistics().getCredits());
-                    player.sendMessage("Highest Kill Streak: " + targetProfile.getStatistics().getHighestKillStreak());
+                    targetName = target.getDisplayName() + "'s";
+                    kills = targetProfile.getStatistics().getKills();
+                    deaths = targetProfile.getStatistics().getDeaths();
+                    kill_streak = targetProfile.getStatistics().getKillStreak();
+                    credits = targetProfile.getStatistics().getCredits();
+                    highest_kill_streak = targetProfile.getStatistics().getHighestKillStreak();
+
+                    sendGui(player);
                 } else {
                     WebPlayer webPlayer;
                     try {
@@ -61,33 +67,32 @@ public class StatisticsCommand extends BaseCommand {
 
                     plugin.getMongo().getDocument(false, "profiles", uuid, document -> {
                         if (document != null) {
-                            int kills = document.getInteger("kills");
-                            int deaths = document.getInteger("deaths");
-                            int killStreak = document.getInteger("kill_streak");
-                            int highestKillStreak = document.getInteger("highest_kill_streak");
-                            int credits = document.getInteger("credits");
+                            targetName = document.getString("name") + "'s";
+                            kills = document.getInteger("kills");
+                            deaths = document.getInteger("deaths");
+                            kill_streak = document.getInteger("kill_streak");
+                            highest_kill_streak = document.getInteger("highest_kill_streak");
+                            credits = document.getInteger("credits");
 
-                            double kdr = kills == 0 ? 0.0 : deaths == 0 ? kills : Math.round(((double) kills / deaths) * 10.0) / 10.0;
-
-                            player.sendMessage(Color.translate("&6&lStatistics of " + webPlayer.getName()) );
-                            player.sendMessage("Kills: " + kills);
-                            player.sendMessage("Deaths: " + deaths);
-                            player.sendMessage("Kill Streak: " + killStreak);
-                            player.sendMessage("KDR: " + kdr);
-                            player.sendMessage("Credits: " + credits);
-                            player.sendMessage("Highest Kill Streak: " + highestKillStreak);
+                            sendGui(player);
                         }
                     });
                 }
             } else {
-                player.sendMessage(Color.translate("&6&lYour Statistics") );
-                player.sendMessage("Kills: " + profile.getStatistics().getKills());
-                player.sendMessage("Deaths: " + profile.getStatistics().getDeaths());
-                player.sendMessage("Kill Streak: " + profile.getStatistics().getKillStreak());
-                player.sendMessage("KDR: " + profile.getStatistics().getKillDeathRatio());
-                player.sendMessage("Credits: " + profile.getStatistics().getCredits());
-                player.sendMessage("Highest Kill Streak: " + profile.getStatistics().getHighestKillStreak());
+                targetName = "Your";
+                kills = profile.getStatistics().getKills();
+                deaths = profile.getStatistics().getDeaths();
+                kill_streak = profile.getStatistics().getKillStreak();
+                credits = profile.getStatistics().getCredits();
+                highest_kill_streak = profile.getStatistics().getHighestKillStreak();
+
+                sendGui(player);
             }
         });
+    }
+
+    private void sendGui(Player player) {
+        plugin.getInventoryManager().registerPlayerWrapper(new StatsPlayerWrapper(plugin, targetName, kills, deaths, kill_streak, credits, highest_kill_streak));
+        plugin.getInventoryManager().getPlayerWrapper(StatsPlayerWrapper.class).open(player);
     }
 }
