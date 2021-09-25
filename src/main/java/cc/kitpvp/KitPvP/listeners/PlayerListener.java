@@ -226,7 +226,12 @@ public class PlayerListener implements Listener {
 
             String strPercent = String.format("%.1f", percent * 100);
 
+            //add credits
             damagerProfile.getStatistics().setCredits(damagerProfile.getStatistics().getCredits() + worth);
+
+            //add xp
+            int xp = killer ? 5 : 10;
+            damagerProfile.setXp(damagerProfile.getXp() + xp);
 
             if (killer) {
                 killer = false;

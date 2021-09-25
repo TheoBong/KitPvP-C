@@ -3,6 +3,7 @@ package cc.kitpvp.KitPvP.scoreboard;
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.player.PlayerStatistics;
 import cc.kitpvp.KitPvP.player.Profile;
+import cc.kitpvp.KitPvP.util.Levels;
 import cc.kitpvp.KitPvP.util.message.Color;
 import cc.kitpvp.KitPvP.util.player.PlayerUtil;
 import cc.kitpvp.KitPvP.util.scoreboardapi.ScoreboardUpdateEvent;
@@ -67,7 +68,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
                 event.addLine("Cooldown: &a" + cooldown.formattedClock());
             }
         }
-        event.addLine("");
+        event.addLine("Level: &a" + profile.getLevel() + " (" + Levels.progress(profile.getXp()) + ")");
         event.addLine("Kills: &a" + stats.getKills());
         event.addLine("Deaths: &a" + stats.getDeaths());
         event.addLine("Kill Streak: &a" + stats.getKillStreak());

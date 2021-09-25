@@ -3,6 +3,7 @@ package cc.kitpvp.KitPvP.player;
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.kits.Kit;
 import cc.kitpvp.KitPvP.storage.mongo.MongoUpdate;
+import cc.kitpvp.KitPvP.util.Levels;
 import cc.kitpvp.KitPvP.util.timer.Timer;
 import cc.kitpvp.KitPvP.util.timer.impl.DoubleTimer;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class Profile {
     private String name;
     private PlayerDamageData damageData = new PlayerDamageData();
     private PlayerStatistics statistics = new PlayerStatistics();
+    private int xp = 0;
+    private int level = 1;
     private Timer pearlTimer = new DoubleTimer(16);
     private PlayerState state = PlayerState.SPAWN;
     private List<String> freeKits = new ArrayList<>(Arrays.asList("PvP"));
@@ -51,6 +54,10 @@ public class Profile {
         if (lastKitName != null) {
             lastKit = plugin.getKitManager().getFfaKitByName(lastKitName);
         }
+
+        xp = document.getInteger("xp");
+        level = Levels.calculateLevel(xp);
+
         statistics.setDeaths(document.getInteger("deaths", 0));
         statistics.setHighestKillStreak(document.getInteger("highest_kill_streak", 0));
         statistics.setKills(document.getInteger("kills", 0));
@@ -75,6 +82,7 @@ public class Profile {
         map.put("highest_kill_streak", statistics.getHighestKillStreak());
         map.put("kills", statistics.getKills());
         map.put("kill_streak", statistics.getKillStreak());
+        map.put("xp", xp);
         map.put("credits", statistics.getCredits());
         map.put("purchased_kits", purchasedKits);
         map.put("scoreboard_enabled", scoreboardEnabled);
