@@ -30,7 +30,6 @@ public class Profile {
     private List<String> purchasedKits = new ArrayList<>();
     private Kit currentKit;
     private Kit lastKit;
-    private boolean fallDamageEnabled = true;
     private boolean awaitingTeleport;
     private boolean controllable = true;
     private UUID lastAttacked;

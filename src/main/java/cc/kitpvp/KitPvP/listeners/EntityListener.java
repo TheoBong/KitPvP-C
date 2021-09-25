@@ -64,7 +64,7 @@ public class EntityListener implements Listener {
 
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             victim.teleport(plugin.getSpawnLocation());
-        } else if (event.getCause() == EntityDamageEvent.DamageCause.FALL && !victimProfile.isFallDamageEnabled()) {
+        } else if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setCancelled(true);
             return;
         }

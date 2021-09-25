@@ -73,7 +73,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
         event.addLine("Deaths: &a" + stats.getDeaths());
         event.addLine("Kill Streak: &a" + stats.getKillStreak());
         event.addLine("KDR: &a" + stats.getKillDeathRatio());
-        event.addLine("Credits: &a" + stats.getCredits());
+        event.addLine("Gold: &a" + stats.getCredits());
 
         event.addLine("");
         event.addLine("&7kitpvp.cc");

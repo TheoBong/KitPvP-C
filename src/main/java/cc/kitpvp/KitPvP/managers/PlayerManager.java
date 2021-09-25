@@ -91,14 +91,6 @@ public class PlayerManager {
         player.setFlying(false);
         player.setAllowFlight(false);
 
-        profile.setFallDamageEnabled(false);
-
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            if (player.isOnline()) {
-                profile.setFallDamageEnabled(true);
-            }}, 20L * 5);
-
-
         player.sendMessage(CC.RED + "You no longer have spawn protection!");
     }
 
@@ -106,7 +98,6 @@ public class PlayerManager {
         Profile profile = getProfile(player);
 
         profile.setState(PlayerState.SPAWN);
-        profile.setFallDamageEnabled(true);
 
         if (player.hasPermission("kitpvp.donor")) {
             player.setAllowFlight(true);
@@ -123,8 +114,6 @@ public class PlayerManager {
         Profile profile = getProfile(player);
 
         profile.setState(PlayerState.SPAWN);
-        profile.setFallDamageEnabled(true);
-
         giveSpawnItems(player);
 
         if (player.hasPermission("kitpvp.donor")) {

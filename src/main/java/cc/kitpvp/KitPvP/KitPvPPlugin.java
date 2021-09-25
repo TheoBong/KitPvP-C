@@ -105,6 +105,7 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new KitShopCommand(this));
         registerCommand(new StatisticsCommand(this));
         registerCommand(new LeaderboardCommand(this));
+        registerCommand(new DepositCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);

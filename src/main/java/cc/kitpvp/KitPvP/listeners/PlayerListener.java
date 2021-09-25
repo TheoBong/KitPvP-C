@@ -10,6 +10,7 @@ import cc.kitpvp.KitPvP.player.PlayerDamageData;
 import cc.kitpvp.KitPvP.player.PlayerState;
 import cc.kitpvp.KitPvP.player.Profile;
 import cc.kitpvp.KitPvP.util.MathUtil;
+import cc.kitpvp.KitPvP.util.item.ItemBuilder;
 import cc.kitpvp.KitPvP.util.message.CC;
 import cc.kitpvp.KitPvP.util.player.PlayerUtil;
 import cc.kitpvp.KitPvP.util.timer.Timer;
@@ -227,7 +228,25 @@ public class PlayerListener implements Listener {
             String strPercent = String.format("%.1f", percent * 100);
 
             //add credits
-            damagerProfile.getStatistics().setCredits(damagerProfile.getStatistics().getCredits() + worth);
+            ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(worth).build();
+            damager.getInventory().addItem(itemStack);
+
+            //Give the killer the gold that the victim had
+            if (killer) {
+                int goldAmount = 0;
+                for (ItemStack itemStack1 : player.getInventory().getContents()) {
+                    if (itemStack1 == null) continue;
+
+                    if (itemStack1.isSimilar(new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").build())) {
+                        goldAmount = goldAmount + itemStack1.getAmount();
+                    }
+                }
+
+                ItemStack itemStack2 = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(goldAmount).build();
+                if (goldAmount != 0) damager.getInventory().addItem(itemStack2);
+
+                damager.sendMessage("You were given " + player.getDisplayName() + "'s undeposited gold (" + goldAmount + ")!");
+            }
 
             //add xp
             int xp = killer ? 5 : 10;
