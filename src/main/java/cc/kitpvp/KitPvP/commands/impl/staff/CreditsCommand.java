@@ -134,7 +134,7 @@ public class CreditsCommand extends BaseCommand {
                         Profile targetProfile = plugin.getPlayerManager().getProfile(target);
                         int previousCredits = targetProfile.getStatistics().getCredits();
                         targetProfile.getStatistics().setCredits(previousCredits + credits);
-                        sender.sendMessage("Successfuly added " + credits + "to " + target.getDisplayName() + ", new balance: " + (previousCredits + credits));
+                        sender.sendMessage("Successfuly added " + credits + " to " + target.getDisplayName() + ", new balance: " + (previousCredits + credits));
                     } else {
                         WebPlayer webPlayer;
                         try {
@@ -162,7 +162,7 @@ public class CreditsCommand extends BaseCommand {
                                 mu.setUpdate(map);
                                 plugin.getMongo().massUpdate(false, mu);
 
-                                sender.sendMessage("Successfuly added " + credits + "to " + webPlayer.getName() + ", new balance: " + (previousCredits + credits));
+                                sender.sendMessage("Successfuly added " + credits + " to " + webPlayer.getName() + ", new balance: " + (previousCredits + credits));
                             }
                         });
                     }
@@ -186,7 +186,7 @@ public class CreditsCommand extends BaseCommand {
                         Profile targetProfile = plugin.getPlayerManager().getProfile(target);
                         int previousCredits = targetProfile.getStatistics().getCredits();
                         targetProfile.getStatistics().setCredits(previousCredits - credits);
-                        sender.sendMessage("Successfuly removed " + credits + "from " + target.getDisplayName() + ", new balance: " + (previousCredits - credits));
+                        sender.sendMessage("Successfuly removed " + credits + " from " + target.getDisplayName() + ", new balance: " + (previousCredits - credits));
                     } else {
                         WebPlayer webPlayer;
                         try {
@@ -214,7 +214,7 @@ public class CreditsCommand extends BaseCommand {
                                 mu.setUpdate(map);
                                 plugin.getMongo().massUpdate(false, mu);
 
-                                sender.sendMessage("Successfuly removed " + credits + "from " + webPlayer.getName() + ", new balance: " + (previousCredits - credits));
+                                sender.sendMessage("Successfuly removed " + credits + " from " + webPlayer.getName() + ", new balance: " + (previousCredits - credits));
                             }
                         });
                     }

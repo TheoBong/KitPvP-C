@@ -6,10 +6,7 @@ import cc.kitpvp.KitPvP.commands.impl.staff.CreditsCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.EditRegionCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.SetSpawnCommand;
 import cc.kitpvp.KitPvP.inventories.*;
-import cc.kitpvp.KitPvP.listeners.EntityListener;
-import cc.kitpvp.KitPvP.listeners.PlayerListener;
-import cc.kitpvp.KitPvP.listeners.RegionListener;
-import cc.kitpvp.KitPvP.listeners.WorldListener;
+import cc.kitpvp.KitPvP.listeners.*;
 import cc.kitpvp.KitPvP.managers.KitManager;
 import cc.kitpvp.KitPvP.managers.LeaderBoardManager;
 import cc.kitpvp.KitPvP.managers.PlayerManager;
@@ -111,6 +108,7 @@ public class KitPvPPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
         getServer().getPluginManager().registerEvents(new RegionListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
+        getServer().getPluginManager().registerEvents(new FishListener(), this);
 
         disableGameRules(mainWorld,
                 "doDaylightCycle",
