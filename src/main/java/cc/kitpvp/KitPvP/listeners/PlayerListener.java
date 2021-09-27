@@ -223,6 +223,26 @@ public class PlayerListener implements Listener {
                 continue;
             }
 
+            //set bounties for high killstreaks (adds 50 to bounty every 10 kills)
+            if (killer) {
+                int killStreak = damagerProfile.getStatistics().getKillStreak();
+                if (killStreak > 0 && 10 % killStreak == 0) {
+                    damagerProfile.setBounty(damagerProfile.getBounty() + 50);
+                    damager.sendMessage("Your bounty has increased by 50 gold. New bounty: " + damagerProfile.getBounty());
+                }
+            }
+
+            //check if victim had bounty & give to killer if so
+            if (killer) {
+                int bounty = profile.getBounty();
+                if (bounty != 0) {
+                    ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(bounty).build();
+                    damager.getInventory().addItem(itemStack);
+
+                    damager.sendMessage("You received " + bounty + " gold as a bounty for killing " + player.getDisplayName());
+                }
+            }
+
             int worth = killer ? 10 : (int) (10 * percent);
 
             String strPercent = String.format("%.1f", percent * 100);

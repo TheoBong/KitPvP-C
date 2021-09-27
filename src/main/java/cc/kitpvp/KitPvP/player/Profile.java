@@ -33,6 +33,7 @@ public class Profile {
     private boolean awaitingTeleport;
     private boolean controllable = true;
     private UUID lastAttacked;
+    private int bounty = 0;
     private PlayerTimeType currentTimeType = PlayerTimeType.DAY;
 
     private boolean scoreboardEnabled = true;
