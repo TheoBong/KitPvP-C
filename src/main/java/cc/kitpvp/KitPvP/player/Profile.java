@@ -58,6 +58,8 @@ public class Profile {
         xp = document.getInteger("xp");
         level = Levels.calculateLevel(xp);
 
+        bounty = document.getInteger("bounty");
+
         statistics.setDeaths(document.getInteger("deaths", 0));
         statistics.setHighestKillStreak(document.getInteger("highest_kill_streak", 0));
         statistics.setKills(document.getInteger("kills", 0));
@@ -83,6 +85,7 @@ public class Profile {
         map.put("kills", statistics.getKills());
         map.put("kill_streak", statistics.getKillStreak());
         map.put("xp", xp);
+        map.put("bounty", bounty);
         map.put("credits", statistics.getCredits());
         map.put("purchased_kits", purchasedKits);
         map.put("scoreboard_enabled", scoreboardEnabled);

@@ -15,6 +15,7 @@ import cc.kitpvp.KitPvP.util.message.CC;
 import cc.kitpvp.KitPvP.util.player.PlayerUtil;
 import cc.kitpvp.KitPvP.util.timer.Timer;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -229,6 +230,7 @@ public class PlayerListener implements Listener {
                 if (killStreak > 0 && 10 % killStreak == 0) {
                     damagerProfile.setBounty(damagerProfile.getBounty() + 50);
                     damager.sendMessage("Your bounty has increased by 50 gold. New bounty: " + damagerProfile.getBounty());
+                    Bukkit.broadcastMessage(damager.getDisplayName() + " now has the bounty of " + damagerProfile.getBounty())
                 }
             }
 
@@ -241,6 +243,8 @@ public class PlayerListener implements Listener {
 
                     damager.sendMessage("You received " + bounty + " gold as a bounty for killing " + player.getDisplayName());
                 }
+
+                profile.setBounty(0);
             }
 
             int worth = killer ? 10 : (int) (10 * percent);
