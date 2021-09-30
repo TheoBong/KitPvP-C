@@ -230,7 +230,7 @@ public class PlayerListener implements Listener {
                 if (killStreak > 0 && 10 % killStreak == 0) {
                     damagerProfile.setBounty(damagerProfile.getBounty() + 50);
                     damager.sendMessage("Your bounty has increased by 50 gold. New bounty: " + damagerProfile.getBounty());
-                    Bukkit.broadcastMessage(damager.getDisplayName() + " now has the bounty of " + damagerProfile.getBounty())
+                    Bukkit.broadcastMessage(damager.getDisplayName() + " now has the bounty of " + damagerProfile.getBounty());
                 }
             }
 
