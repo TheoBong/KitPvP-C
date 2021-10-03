@@ -77,6 +77,7 @@ public class KitPvPPlugin extends JavaPlugin {
         leaderBoardManager = new LeaderBoardManager(this);
 
         inventoryManager.registerPlayerWrapper(new KitPlayerWrapper(this));
+        inventoryManager.registerPlayerWrapper(new LeaderboardWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitSelectorPlayerWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitShopPlayerWrapper(this));
         inventoryManager.registerWrapper(new ShopWrapper());
@@ -118,6 +119,8 @@ public class KitPvPPlugin extends JavaPlugin {
                 "mobGriefing"
         );
 
+        getServer().getScheduler().runTaskAsynchronously(this, leaderBoardManager);
+        getServer().getScheduler().runTaskTimerAsynchronously(this, leaderBoardManager, 20L * 60 * 10, 20L * 60L * 10);
     }
 
     @Override

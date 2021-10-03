@@ -2,6 +2,8 @@ package cc.kitpvp.KitPvP.commands.impl;
 
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.commands.BaseCommand;
+import cc.kitpvp.KitPvP.inventories.KitSelectorPlayerWrapper;
+import cc.kitpvp.KitPvP.inventories.LeaderboardWrapper;
 import cc.kitpvp.KitPvP.util.ThreadUtil;
 import org.bson.Document;
 import org.bukkit.command.CommandSender;
@@ -19,22 +21,13 @@ public class LeaderboardCommand extends BaseCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        ThreadUtil.runTask(true, plugin, () -> {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage("Players only!");
-                return;
-            }
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Players only!");
+            return;
+        }
 
-            plugin.getLeaderBoardManager().sortTop();
+        Player player = (Player) sender;
 
-            int position = 0;
-            Iterator<Document> killsSorted = plugin.getLeaderBoardManager().getKillsSorted();
-            while(killsSorted.hasNext()) {
-                Document document = killsSorted.next();
-                String name = document.getString("name");
-
-                sender.sendMessage("#" + position++ + " - " + name + " - " + document.getInteger("kills"));
-            }
-        });
+        plugin.getInventoryManager().getPlayerWrapper(LeaderboardWrapper.class).open(player);
     }
 }
