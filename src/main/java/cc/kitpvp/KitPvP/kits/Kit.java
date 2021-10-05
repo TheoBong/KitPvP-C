@@ -21,10 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Kit implements Listener {
     protected KitPvPPlugin plugin;
-    @Getter
-    private final String name;
-    @Getter
-    private final ItemStack icon;
+    @Getter private final String name;
+    @Getter private final ItemStack icon;
     private final KitContents contents;
     private final List<PotionEffect> effects;
     private final Map<String, Integer> cooldownTimers = new HashMap<>();

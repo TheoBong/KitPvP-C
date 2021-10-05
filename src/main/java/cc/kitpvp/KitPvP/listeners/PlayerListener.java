@@ -238,7 +238,7 @@ public class PlayerListener implements Listener {
             if (killer) {
                 int bounty = profile.getBounty();
                 if (bounty != 0) {
-                    ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(bounty).build();
+                    ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").amount(bounty).build();
                     damager.getInventory().addItem(itemStack);
 
                     damager.sendMessage("You received " + bounty + " gold as a bounty for killing " + player.getDisplayName());
@@ -252,7 +252,7 @@ public class PlayerListener implements Listener {
             String strPercent = String.format("%.1f", percent * 100);
 
             //add credits
-            ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(worth).build();
+            ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").amount(worth).build();
             damager.getInventory().addItem(itemStack);
 
             //Give the killer the gold that the victim had
@@ -261,12 +261,12 @@ public class PlayerListener implements Listener {
                 for (ItemStack itemStack1 : player.getInventory().getContents()) {
                     if (itemStack1 == null) continue;
 
-                    if (itemStack1.isSimilar(new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").build())) {
+                    if (itemStack1.isSimilar(new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").build())) {
                         goldAmount = goldAmount + itemStack1.getAmount();
                     }
                 }
 
-                ItemStack itemStack2 = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").amount(goldAmount).build();
+                ItemStack itemStack2 = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").amount(goldAmount).build();
                 if (goldAmount != 0) damager.getInventory().addItem(itemStack2);
 
                 damager.sendMessage("You were given " + player.getDisplayName() + "'s undeposited gold (" + goldAmount + ")!");

@@ -34,7 +34,7 @@ public class DepositCommand extends BaseCommand {
             return;
         }
 
-        ItemStack goldItem = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + "Gold").build();
+        ItemStack goldItem = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").build();
 
         int gold = 0;
         for (ItemStack itemStack : player.getInventory().getContents()) {

@@ -4,6 +4,7 @@ import cc.kitpvp.KitPvP.commands.BaseCommand;
 import cc.kitpvp.KitPvP.commands.impl.*;
 import cc.kitpvp.KitPvP.commands.impl.staff.CreditsCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.EditRegionCommand;
+import cc.kitpvp.KitPvP.commands.impl.staff.HologramCommand;
 import cc.kitpvp.KitPvP.commands.impl.staff.SetSpawnCommand;
 import cc.kitpvp.KitPvP.inventories.*;
 import cc.kitpvp.KitPvP.listeners.*;
@@ -104,6 +105,7 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new StatisticsCommand(this));
         registerCommand(new LeaderboardCommand(this));
         registerCommand(new DepositCommand(this));
+        registerCommand(new HologramCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
