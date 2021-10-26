@@ -48,6 +48,14 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <relocations>
+            <relocation>
+              <pattern>org.mongodb</pattern>
+              <shadedPattern>cc.kitpvp.KitPvP.org.mongodb</shadedPattern>
+            </relocation>
+          </relocations>
+        </configuration>
       </plugin>
     </plugins>
   </build>

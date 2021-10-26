@@ -4,6 +4,7 @@ import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.util.ThreadUtil;
 import lombok.Getter;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -76,5 +77,31 @@ public class LeaderBoardManager implements Runnable {
 
             if (killStreakPosition > 5) break;
         }
+
+        plugin.getServer().getScheduler().runTask(plugin, ()-> {
+            plugin.getKillHologram().appendTextLine("Kills Leaderboard");
+            plugin.getKillHologram().appendTextLine(" ");
+            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(0));
+            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(1));
+            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(2));
+            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(3));
+            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(4));
+
+            plugin.getKillStreakHologram().appendTextLine("KillStreak Leaderboard");
+            plugin.getKillStreakHologram().appendTextLine(" ");
+            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(0));
+            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(1));
+            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(2));
+            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(3));
+            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(4));
+
+            plugin.getCreditsHologram().appendTextLine("Credits Leaderboard");
+            plugin.getCreditsHologram().appendTextLine(" ");
+            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(0));
+            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(1));
+            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(2));
+            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(3));
+            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(4));
+        });
     }
 }

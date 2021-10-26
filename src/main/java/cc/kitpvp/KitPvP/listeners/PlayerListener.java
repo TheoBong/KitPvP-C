@@ -91,7 +91,7 @@ public class PlayerListener implements Listener {
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
                 .collect(Collectors.toList());
-        boolean kill = nearbyPlayers.stream().map(nearbyPlayer -> plugin.getPlayerManager().getProfile(nearbyPlayer)).anyMatch(nearbyProfile -> nearbyProfile.getState() == PlayerState.FFA);
+        boolean kill = nearbyPlayers.stream().map(nearbyPlayer -> plugin.getPlayerManager().getProfile(nearbyPlayer)).anyMatch(nearbyProfile -> nearbyProfile != null && nearbyProfile.getState() == PlayerState.FFA);
 
         if (kill) {
             player.setHealth(0.0);

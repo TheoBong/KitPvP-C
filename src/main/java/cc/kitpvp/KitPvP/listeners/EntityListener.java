@@ -62,6 +62,10 @@ public class EntityListener implements Listener {
         Player victim = (Player) event.getEntity();
         Profile victimProfile = plugin.getPlayerManager().getProfile(victim);
 
+        if (victimProfile == null) {
+            return;
+        }
+
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             victim.teleport(plugin.getSpawnLocation());
         } else if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
@@ -89,6 +93,10 @@ public class EntityListener implements Listener {
         Player victim = (Player) event.getEntity();
 
         Profile victimProfile = plugin.getPlayerManager().getProfile(victim);
+
+        if (victimProfile == null) {
+            return;
+        }
 
         if (victimProfile.getState() == PlayerState.SPAWN) {
             damager.sendMessage(CC.RED + "That player currently has spawn protection.");

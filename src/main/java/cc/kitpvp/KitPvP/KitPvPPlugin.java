@@ -18,6 +18,8 @@ import cc.kitpvp.KitPvP.storage.mongo.Mongo;
 import cc.kitpvp.KitPvP.util.inventoryapi.InventoryManager;
 import cc.kitpvp.KitPvP.util.scoreboardapi.ScoreboardApi;
 import cc.kitpvp.KitPvP.util.structure.Cuboid;
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -31,14 +33,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class KitPvPPlugin extends JavaPlugin {
     private CommandMap commandMap;
 
     @Getter private Config locationConfig;
     @Setter @Getter private Location spawnLocation;
+    @Setter @Getter private Location killLeaderboardLoc;
+    @Setter @Getter private Location killStreakLeaderboardLoc;
+    @Setter @Getter private Location creditsLeaderboardLoc;
     @Setter @Getter private Cuboid spawnCuboid;
+
+    @Setter @Getter private Hologram killHologram;
+    @Setter @Getter private Hologram killStreakHologram;
+    @Setter @Getter private Hologram creditsHologram;
 
     @Getter private Mongo mongo;
 
@@ -68,6 +79,10 @@ public class KitPvPPlugin extends JavaPlugin {
 
         spawnLocation = locationConfig.getLocation("spawn");
         spawnCuboid = (Cuboid) locationConfig.get("spawn-cuboid");
+
+        killLeaderboardLoc = locationConfig.getLocation("kills-leaderboard");
+        killStreakLeaderboardLoc = locationConfig.getLocation("killstreak-leaderboard");
+        creditsLeaderboardLoc = locationConfig.getLocation("credits-leaderboard");
 
         mongo = new Mongo(this);
 
@@ -120,6 +135,18 @@ public class KitPvPPlugin extends JavaPlugin {
                 "showDeathMessages",
                 "mobGriefing"
         );
+
+        if (killLeaderboardLoc != null) {
+            killHologram = HologramsAPI.createHologram(this, killLeaderboardLoc);
+        }
+
+        if (killStreakLeaderboardLoc != null) {
+            killStreakHologram = HologramsAPI.createHologram(this, killStreakLeaderboardLoc);
+        }
+
+        if (creditsLeaderboardLoc != null) {
+            creditsHologram = HologramsAPI.createHologram(this, creditsLeaderboardLoc);
+        }
 
         getServer().getScheduler().runTaskAsynchronously(this, leaderBoardManager);
         getServer().getScheduler().runTaskTimerAsynchronously(this, leaderBoardManager, 20L * 60 * 10, 20L * 60L * 10);

@@ -49,11 +49,16 @@ public class HologramCommand extends BaseCommand {
                         hologram = HologramsAPI.createHologram(plugin, location);
 
                         hologram.appendTextLine("Kills Leaderboard");
+                        hologram.appendTextLine(" ");
                         hologram.appendTextLine(killsLeaderboard.get(0));
                         hologram.appendTextLine(killsLeaderboard.get(1));
                         hologram.appendTextLine(killsLeaderboard.get(2));
                         hologram.appendTextLine(killsLeaderboard.get(3));
                         hologram.appendTextLine(killsLeaderboard.get(4));
+
+                        plugin.getLocationConfig().set("kills-leaderboard", location);
+                        plugin.getLocationConfig().save();
+
 
                         player.sendMessage("Spawned.");
                         break;
@@ -63,11 +68,15 @@ public class HologramCommand extends BaseCommand {
                         hologram = HologramsAPI.createHologram(plugin, location);
 
                         hologram.appendTextLine("Credits Leaderboard");
+                        hologram.appendTextLine(" ");
                         hologram.appendTextLine(creditsLeaderboard.get(0));
                         hologram.appendTextLine(creditsLeaderboard.get(1));
                         hologram.appendTextLine(creditsLeaderboard.get(2));
                         hologram.appendTextLine(creditsLeaderboard.get(3));
                         hologram.appendTextLine(creditsLeaderboard.get(4));
+
+                        plugin.getLocationConfig().set("credits-leaderboard", location);
+                        plugin.getLocationConfig().save();
 
                         player.sendMessage("Spawned.");
                         break;
@@ -77,11 +86,15 @@ public class HologramCommand extends BaseCommand {
                         hologram = HologramsAPI.createHologram(plugin, location);
 
                         hologram.appendTextLine("KillStreak Leaderboard");
+                        hologram.appendTextLine(" ");
                         hologram.appendTextLine(killStreakLeaderboard.get(0));
                         hologram.appendTextLine(killStreakLeaderboard.get(1));
                         hologram.appendTextLine(killStreakLeaderboard.get(2));
                         hologram.appendTextLine(killStreakLeaderboard.get(3));
                         hologram.appendTextLine(killStreakLeaderboard.get(4));
+
+                        plugin.getLocationConfig().set("killstreak-leaderboard", location);
+                        plugin.getLocationConfig().save();
 
                         player.sendMessage("Spawned.");
                         break;
