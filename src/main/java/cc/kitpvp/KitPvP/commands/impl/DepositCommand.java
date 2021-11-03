@@ -47,9 +47,7 @@ public class DepositCommand extends BaseCommand {
 
         player.getInventory().remove(Material.GOLD_INGOT);
 
-        int bonus = profile.getLevel();
-
-        profile.getStatistics().setCredits(profile.getStatistics().getCredits() + (gold + bonus));
-        player.sendMessage("Successfully deposited: " + gold + " gold (Bonus: " + bonus + ").");
+        profile.getStatistics().setCredits(profile.getStatistics().getCredits() + (gold));
+        player.sendMessage("Successfully deposited: " + gold +".");
     }
 }

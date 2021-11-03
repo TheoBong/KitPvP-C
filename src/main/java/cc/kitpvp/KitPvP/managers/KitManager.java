@@ -2,8 +2,7 @@ package cc.kitpvp.KitPvP.managers;
 
 import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.kits.Kit;
-import cc.kitpvp.KitPvP.kits.impl.ffa.PvP;
-import cc.kitpvp.KitPvP.kits.impl.ffa.Rod;
+import cc.kitpvp.KitPvP.kits.impl.ffa.*;
 import lombok.Getter;
 
 import java.util.Collection;
@@ -18,7 +17,16 @@ public class KitManager {
     public KitManager(KitPvPPlugin plugin) {
         registerFFAKits(
                 new PvP(plugin),
-                new Rod(plugin)
+                new Archer(plugin),
+                new Berserker(plugin),
+                new Chemist(plugin),
+                new Clout(plugin),
+                new Flash(plugin),
+                new Mineman(plugin),
+                new Ninja(plugin),
+                new Turtle(plugin),
+                new Unholy(plugin),
+                new Vampire(plugin)
         );
 
         defaultKit = getFfaKitByClass(PvP.class);

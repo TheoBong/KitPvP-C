@@ -24,8 +24,8 @@ public class CC {
     public static String U = ChatColor.UNDERLINE.toString();
     public static String S = ChatColor.STRIKETHROUGH.toString();
     public static String R = ChatColor.RESET.toString();
-    public static String PRIMARY = ChatColor.WHITE.toString();
-    public static String SECONDARY = ChatColor.RED.toString();
+    public static String PRIMARY = ChatColor.YELLOW.toString();
+    public static String SECONDARY = ChatColor.GREEN.toString();
     public static String ACCENT = ChatColor.GOLD.toString();
     public static String SPLITTER = "┃";
     public static String BOARD_SEPARATOR = GRAY + S + StringUtils.repeat("-", 18); //18

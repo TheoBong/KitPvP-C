@@ -1,5 +1,7 @@
 package cc.kitpvp.KitPvP.listeners;
 
+import cc.kitpvp.KitPvP.KitPvPPlugin;
+import cc.kitpvp.KitPvP.player.Profile;
 import cc.kitpvp.KitPvP.util.item.ItemBuilder;
 import cc.kitpvp.KitPvP.util.message.CC;
 import org.bukkit.Material;
@@ -19,6 +21,12 @@ import java.util.Random;
 
 public class FishListener implements Listener {
 
+    private final KitPvPPlugin plugin;
+
+    public FishListener(KitPvPPlugin plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onFish(PlayerFishEvent event) {
         Player player = event.getPlayer();
@@ -37,9 +45,9 @@ public class FishListener implements Listener {
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK) {
-            return;
-        }
+//        if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK) {
+//            return;
+//        }
 
         if (event.getItem() == null) {
             return;
@@ -60,8 +68,17 @@ public class FishListener implements Listener {
 
         ItemStack resFish = new ItemBuilder(Material.RAW_FISH).name(CC.GOLD + "Resistance fish").build();
         if (event.getItem().isSimilar(resFish)) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 1);
-            player.addPotionEffect(potionEffect);
+            Profile profile = plugin.getPlayerManager().getProfile(player);
+            if (profile.getCurrentKit() == plugin.getKitManager().getFfaKitByName("flash")) {
+                PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 3);
+                player.addPotionEffect(potionEffect);
+
+                PotionEffect potionEffect2 = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 2);
+                plugin.getServer().getScheduler().runTaskLater(plugin, () -> player.addPotionEffect(potionEffect2), 200);
+            } else {
+                PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 1);
+                player.addPotionEffect(potionEffect);
+            }
 
             ItemStack removeItem = new ItemBuilder(Material.RAW_FISH).name(CC.GOLD + "Resistance fish").amount(1).build();
             player.getInventory().removeItem(removeItem);

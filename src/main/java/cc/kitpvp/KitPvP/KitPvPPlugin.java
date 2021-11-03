@@ -96,7 +96,7 @@ public class KitPvPPlugin extends JavaPlugin {
         inventoryManager.registerPlayerWrapper(new LeaderboardWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitSelectorPlayerWrapper(this));
         inventoryManager.registerPlayerWrapper(new KitShopPlayerWrapper(this));
-        inventoryManager.registerWrapper(new ShopWrapper());
+        inventoryManager.registerWrapper(new ShopWrapper(this));
         inventoryManager.registerPlayerWrapper(new SettingsPlayerWrapper(this));
 
         new ScoreboardApi(this, new KitPvPAdapter(this), true);
@@ -121,12 +121,16 @@ public class KitPvPPlugin extends JavaPlugin {
         registerCommand(new LeaderboardCommand(this));
         registerCommand(new DepositCommand(this));
         registerCommand(new HologramCommand(this));
+        registerCommand(new ShopCommand(this));
+        registerCommand(new RepairCommand(this));
+        registerCommand(new HelpCommand());
+
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
         getServer().getPluginManager().registerEvents(new RegionListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
-        getServer().getPluginManager().registerEvents(new FishListener(), this);
+        getServer().getPluginManager().registerEvents(new FishListener(this), this);
 
         disableGameRules(mainWorld,
                 "doDaylightCycle",

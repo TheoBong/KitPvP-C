@@ -33,7 +33,6 @@ public class Profile {
     private boolean awaitingTeleport;
     private boolean controllable = true;
     private UUID lastAttacked;
-    private int bounty = 0;
     private PlayerTimeType currentTimeType = PlayerTimeType.DAY;
 
     private boolean scoreboardEnabled = true;
@@ -57,8 +56,6 @@ public class Profile {
 
         xp = document.getInteger("xp");
         level = Levels.calculateLevel(xp);
-
-        bounty = document.getInteger("bounty");
 
         statistics.setDeaths(document.getInteger("deaths", 0));
         statistics.setHighestKillStreak(document.getInteger("highest_kill_streak", 0));
@@ -85,7 +82,6 @@ public class Profile {
         map.put("kills", statistics.getKills());
         map.put("kill_streak", statistics.getKillStreak());
         map.put("xp", xp);
-        map.put("bounty", bounty);
         map.put("credits", statistics.getCredits());
         map.put("purchased_kits", purchasedKits);
         map.put("scoreboard_enabled", scoreboardEnabled);

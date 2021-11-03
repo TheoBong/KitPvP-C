@@ -4,13 +4,17 @@ import cc.kitpvp.KitPvP.KitPvPPlugin;
 import cc.kitpvp.KitPvP.player.PlayerStatistics;
 import cc.kitpvp.KitPvP.player.Profile;
 import cc.kitpvp.KitPvP.util.Levels;
+import cc.kitpvp.KitPvP.util.item.ItemBuilder;
+import cc.kitpvp.KitPvP.util.message.CC;
 import cc.kitpvp.KitPvP.util.message.Color;
 import cc.kitpvp.KitPvP.util.player.PlayerUtil;
 import cc.kitpvp.KitPvP.util.scoreboardapi.ScoreboardUpdateEvent;
 import cc.kitpvp.KitPvP.util.scoreboardapi.api.ScoreboardAdapter;
 import cc.kitpvp.KitPvP.util.timer.Timer;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 
@@ -30,16 +34,27 @@ public class KitPvPAdapter implements ScoreboardAdapter {
         Player player = event.getPlayer();
         Profile profile = plugin.getPlayerManager().getProfile(player);
 
-        plugin.getServer().getOnlinePlayers().forEach(players -> {
-            Profile targetProfile = plugin.getPlayerManager().getProfile(players);
+        plugin.getServer().getOnlinePlayers().forEach(target -> {
+            Profile targetProfile = plugin.getPlayerManager().getProfile(target);
 
             Objective objective = player.getScoreboard().getObjective("objectiveBelow");
-            Score score = objective.getScore(players);
+            Score score = objective.getScore(target);
 
             switch (profile.getState()) {
                 case FFA:
-                    objective.setDisplayName("Ping");
-                    score.setScore(PlayerUtil.getPing(players));
+                    ItemStack goldItem = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").build();
+
+                    int gold = 0;
+                    for (ItemStack itemStack : target.getInventory().getContents()) {
+                        if (itemStack == null) continue;
+
+                        if (itemStack.isSimilar(goldItem)) {
+                            gold = gold + itemStack.getAmount();
+                        }
+                    }
+
+                    objective.setDisplayName("Held Gold:");
+                    score.setScore(gold);
                     break;
 
                 case SPAWN:

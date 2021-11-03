@@ -87,6 +87,21 @@ public class PlayerListener implements Listener {
             return;
         }
 
+        if (profile.getState() == PlayerState.SPAWN) {
+            ItemStack goldItem = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").build();
+
+            int gold = 0;
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack == null) continue;
+
+                if (itemStack.isSimilar(goldItem)) {
+                    gold = gold + itemStack.getAmount();
+                }
+            }
+
+            profile.getStatistics().setCredits(profile.getStatistics().getCredits() + (gold));
+        }
+
         List<Player> nearbyPlayers = player.getNearbyEntities(32.0, 32.0, 32.0).stream()
                 .filter(Player.class::isInstance)
                 .map(Player.class::cast)
@@ -222,29 +237,6 @@ public class PlayerListener implements Listener {
 
             if (!killer && percent < 0.15) {
                 continue;
-            }
-
-            //set bounties for high killstreaks (adds 50 to bounty every 10 kills)
-            if (killer) {
-                int killStreak = damagerProfile.getStatistics().getKillStreak();
-                if (killStreak > 0 && 10 % killStreak == 0) {
-                    damagerProfile.setBounty(damagerProfile.getBounty() + 50);
-                    damager.sendMessage("Your bounty has increased by 50 gold. New bounty: " + damagerProfile.getBounty());
-                    Bukkit.broadcastMessage(damager.getDisplayName() + " now has the bounty of " + damagerProfile.getBounty());
-                }
-            }
-
-            //check if victim had bounty & give to killer if so
-            if (killer) {
-                int bounty = profile.getBounty();
-                if (bounty != 0) {
-                    ItemStack itemStack = new ItemBuilder(Material.GOLD_INGOT).name(CC.GOLD + CC.B + "Gold").lore(CC.GRAY + "Deposit gold in spawn using /deposit!").amount(bounty).build();
-                    damager.getInventory().addItem(itemStack);
-
-                    damager.sendMessage("You received " + bounty + " gold as a bounty for killing " + player.getDisplayName());
-                }
-
-                profile.setBounty(0);
             }
 
             int worth = killer ? 10 : (int) (10 * percent);

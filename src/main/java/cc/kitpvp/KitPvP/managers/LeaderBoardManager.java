@@ -79,29 +79,33 @@ public class LeaderBoardManager implements Runnable {
         }
 
         plugin.getServer().getScheduler().runTask(plugin, ()-> {
-            plugin.getKillHologram().appendTextLine("Kills Leaderboard");
-            plugin.getKillHologram().appendTextLine(" ");
-            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(0));
-            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(1));
-            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(2));
-            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(3));
-            plugin.getKillHologram().appendTextLine(killsLeaderboard.get(4));
+            plugin.getKillHologram().clearLines();
+            plugin.getKillStreakHologram().clearLines();
+            plugin.getCreditsHologram().clearLines();
 
-            plugin.getKillStreakHologram().appendTextLine("KillStreak Leaderboard");
-            plugin.getKillStreakHologram().appendTextLine(" ");
-            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(0));
-            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(1));
-            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(2));
-            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(3));
-            plugin.getKillStreakHologram().appendTextLine(killStreakLeaderboard.get(4));
+            plugin.getKillHologram().insertTextLine(0, "Kills Leaderboard");
+            plugin.getKillHologram().insertTextLine(1, " ");
+            plugin.getKillHologram().insertTextLine(2, killsLeaderboard.get(0));
+            plugin.getKillHologram().insertTextLine(3, killsLeaderboard.get(1));
+            plugin.getKillHologram().insertTextLine(4, killsLeaderboard.get(2));
+            plugin.getKillHologram().insertTextLine(5, killsLeaderboard.get(3));
+            plugin.getKillHologram().insertTextLine(6, killsLeaderboard.get(4));
 
-            plugin.getCreditsHologram().appendTextLine("Credits Leaderboard");
-            plugin.getCreditsHologram().appendTextLine(" ");
-            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(0));
-            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(1));
-            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(2));
-            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(3));
-            plugin.getCreditsHologram().appendTextLine(creditsLeaderboard.get(4));
+            plugin.getKillStreakHologram().insertTextLine(0, "KillStreak Leaderboard");
+            plugin.getKillStreakHologram().insertTextLine(1," ");
+            plugin.getKillStreakHologram().insertTextLine(2, killStreakLeaderboard.get(0));
+            plugin.getKillStreakHologram().insertTextLine(3, killStreakLeaderboard.get(1));
+            plugin.getKillStreakHologram().insertTextLine(4, killStreakLeaderboard.get(2));
+            plugin.getKillStreakHologram().insertTextLine(5, killStreakLeaderboard.get(3));
+            plugin.getKillStreakHologram().insertTextLine(6, killStreakLeaderboard.get(4));
+
+            plugin.getCreditsHologram().insertTextLine(0, "Credits Leaderboard");
+            plugin.getCreditsHologram().insertTextLine(1, " ");
+            plugin.getCreditsHologram().insertTextLine(2, creditsLeaderboard.get(0));
+            plugin.getCreditsHologram().insertTextLine(3, creditsLeaderboard.get(1));
+            plugin.getCreditsHologram().insertTextLine(4, creditsLeaderboard.get(2));
+            plugin.getCreditsHologram().insertTextLine(5, creditsLeaderboard.get(3));
+            plugin.getCreditsHologram().insertTextLine(6, creditsLeaderboard.get(4));
         });
     }
 }
