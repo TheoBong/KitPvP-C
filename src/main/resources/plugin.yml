@@ -1,4 +1,5 @@
 name: KitPvP
 version: ${kitpvp.desc}
 author: Theo
-main: cc.kitpvp.KitPvP.KitPvPPlugin
+main: cc.kitpvp.kitpvp.KitPvPPlugin
+softdepend: [ProtocolLib]

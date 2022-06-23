@@ -9,8 +9,5 @@
         <module name="KitPvP" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="KitPvPPlugin-KCC" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
