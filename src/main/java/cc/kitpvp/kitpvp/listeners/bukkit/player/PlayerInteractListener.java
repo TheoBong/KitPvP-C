@@ -68,8 +68,6 @@ public class PlayerInteractListener implements Listener {
                 } else {
                     event.setCancelled(true);
                 }
-            } else {
-                event.setCancelled(true);
             }
         } else if (action.equals(Action.LEFT_CLICK_AIR)) {
             Occupation occupation = profile.getDuelOccupation();

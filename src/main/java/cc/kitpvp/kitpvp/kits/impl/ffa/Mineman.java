@@ -59,7 +59,7 @@ public class Mineman extends Kit {
         return builder;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlace(BlockPlaceEvent event) {
         Player mineman = event.getPlayer();
 

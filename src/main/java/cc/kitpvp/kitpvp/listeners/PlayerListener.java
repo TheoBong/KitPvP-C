@@ -68,8 +68,6 @@ public class PlayerListener implements Listener {
 
         profile.playerUpdateVisibility();
 
-        PlayerUtil.clearPlayer(player);
-
         plugin.getPlayerManager().giveSpawnItems(player);
 
         if (player.hasPermission("kitpvp.donor")) {

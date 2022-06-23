@@ -24,11 +24,23 @@ public class WorldListener implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+//    @EventHandler(priority = EventPriority.HIGH)
+//    public void onPlace(BlockPlaceEvent event) {
+//        Player player = event.getPlayer();
+//
+//        if (player.hasPermission("kitpvp.admin") && player.getGameMode() == GameMode.CREATIVE) {
+//            return;
+//        }
+//
+//        event.setCancelled(true);
+//    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
 
         if (player.hasPermission("kitpvp.admin") && player.getGameMode() == GameMode.CREATIVE) {
+            event.setCancelled(false);
             return;
         }
 

@@ -213,7 +213,7 @@ public class KitPvPPlugin extends JavaPlugin {
         Arrays.stream(listeners).forEach(this::registerListener);
 
 
-//        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
         getServer().getPluginManager().registerEvents(new RegionListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
