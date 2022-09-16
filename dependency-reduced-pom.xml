@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>cc.kitpvp</groupId>
+  <groupId>com.bongbong</groupId>
   <artifactId>KitPvP</artifactId>
   <name>KitPvP</name>
   <version>1.0</version>
@@ -52,11 +52,11 @@
           <relocations>
             <relocation>
               <pattern>org.mongodb.</pattern>
-              <shadedPattern>cc.kitpvp.kitpvp.org.mongo.</shadedPattern>
+              <shadedPattern>com.bongbong.kitpvp.org.mongo.</shadedPattern>
             </relocation>
             <relocation>
               <pattern>com.mongodb.</pattern>
-              <shadedPattern>cc.kitpvp.kitpvp.com.mongo.</shadedPattern>
+              <shadedPattern>com.bongbong.kitpvp.com.mongo.</shadedPattern>
             </relocation>
           </relocations>
         </configuration>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>KitPvP</name>
-    <groupId>cc.kitpvp</groupId>
+    <groupId>com.bongbong</groupId>
     <artifactId>KitPvP</artifactId>
     <version>1.0</version>
 
@@ -68,6 +68,11 @@
             <version>4.5.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.bongbong</groupId>
+            <artifactId>StaffSuite</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -120,11 +125,11 @@
                     <relocations>
                         <relocation>
                             <pattern>org.mongodb.</pattern>
-                            <shadedPattern>cc.kitpvp.kitpvp.org.mongo.</shadedPattern>
+                            <shadedPattern>com.bongbong.kitpvp.org.mongo.</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>com.mongodb.</pattern>
-                            <shadedPattern>cc.kitpvp.kitpvp.com.mongo.</shadedPattern>
+                            <shadedPattern>com.bongbong.kitpvp.com.mongo.</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
