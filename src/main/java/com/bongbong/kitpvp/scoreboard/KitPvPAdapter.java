@@ -77,7 +77,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
         switch (profile.getState()) {
             case SPAWN:
                 event.setTitle(Color.translate("&e&lLOBBY &7(" + plugin.getServer().getOnlinePlayers().size() + "&7)"));
-                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm"));
+                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm").format(new Date()));
                 event.addLine("");
                 event.addLine("&fOnline: &a" + Bukkit.getOnlinePlayers().size());
                 event.addLine("&fBits: &a" + stats.getCredits());
@@ -90,7 +90,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
                 break;
             case FFA:
                 event.setTitle(Color.translate("&e&lFFA &7(" + plugin.getServer().getOnlinePlayers().size() + "&7)"));
-                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm"));
+                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm").format(new Date()));
                 event.addLine("");
                 event.addLine("&fHeld Bits: &a" + calculateGold(player));
                 event.addLine("&fKill Streak: &a" + stats.getKillStreak());
@@ -110,7 +110,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
                 break;
             case IN_DUEL:
                 event.setTitle(Color.translate("&e&lDUELS &7(" + plugin.getServer().getOnlinePlayers().size() + "&7)"));
-                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm"));
+                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm").format(new Date()));
                 event.addLine("");
                 occupation.getScoreboard(profile).forEach(event::addLine);
                 event.addLine("");
@@ -119,7 +119,7 @@ public class KitPvPAdapter implements ScoreboardAdapter {
                 break;
             case SPECTATING_DUEL:
                 event.setTitle(Color.translate("&e&lDUELS &7(" + plugin.getServer().getOnlinePlayers().size() + "&7)"));
-                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm"));
+                event.addLine("&7" + new SimpleDateFormat("MM/dd/yy hh:mm").format(new Date()));
                 event.addLine("");
                 occupation.getSpectatorScoreboard(profile).forEach(event::addLine);
                 event.addLine("");

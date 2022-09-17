@@ -2,4 +2,4 @@ name: KitPvP
 version: ${kitpvp.desc}
 author: Theo
 main: com.bongbong.kitpvp.KitPvPPlugin
-depend: [ProtocolLib]
+depend: [ProtocolLib, StaffSuite]
